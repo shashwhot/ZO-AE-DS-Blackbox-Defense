@@ -7,7 +7,6 @@ The implementation follows a two-stage training strategy that operates without r
 
 * **Stage 1 (Autoencoder Pre-training):** Trains a denoiser-encoder-decoder chain using reconstruction loss to establish baseline purification capabilities.
 * **Stage 2 (ZO Fine-tuning):** Employs Zeroth-Order optimization to adapt the denoiser to a specific black-box victim model, maximizing classification accuracy under adversarial pressure.
-* **Modular Pipeline:** Decouples the training execution from model definitions to allow for flexible experimentation with different victim architectures.
 
 ## Script Functionality
 
