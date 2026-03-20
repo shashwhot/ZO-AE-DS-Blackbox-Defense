@@ -17,11 +17,11 @@ The implementation follows a two-stage defense strategy that operates without re
 * **Data Integration:** Configures data loaders for CIFAR-10/MNIST and interfaces with the pre-trained black-box victim models.
 
 ### scripts/run_certification.py
-* [cite_start]**Robustness Evaluation:** Assesses the purified model's performance using a randomized smoothing wrapper[cite: 1].
-* [cite_start]**Accuracy Certification:** Calculates Standard Accuracy (SA) and Certified Accuracy (CA) at specific radii (0.00, 0.25, 0.50, and 0.75) to quantify defense stability[cite: 1].
+***Robustness Evaluation:** Assesses the purified model's performance using a randomized smoothing wrapper.
+***Accuracy Certification:** Calculates Standard Accuracy (SA) and Certified Accuracy (CA) at specific radii (0.00, 0.25, 0.50, and 0.75) to quantify defense stability.
 
 ### src/zo_estimators.py
-* **Gradient Approximation:** Implements both Random Gradient Estimation (RGE) and Coordinate-wise Gradient Estimation (CGE).
+* **Gradient Approximation:** Has the math for both Random Gradient Estimation (RGE) and Coordinate-wise Gradient Estimation (CGE).
 * **Central Difference Calculation:** Utilizes finite difference probing (perturbing the latent space by $\pm \mu$) to estimate the loss surface without backpropagation.
 
 ### src/models.py
