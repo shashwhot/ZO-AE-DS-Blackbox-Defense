@@ -3,10 +3,10 @@ import os
 import torch
 import torch.nn as nn
 
-# 1. Point Python to your external folder
+# 1. Point Python to external folder
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../external/Black-Box-Defense')))
 
-# 2. Import the original architectures
+# 2. Import the architectures
 from archs.dncnn import DnCNN
 from archs.cae import Cifar_Encoder_192, Cifar_Decoder_192, Cifar_Encoder_96, Cifar_Decoder_96
 
