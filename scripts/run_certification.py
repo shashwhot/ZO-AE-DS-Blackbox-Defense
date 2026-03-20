@@ -5,7 +5,7 @@ import torch
 import numpy as np
 
 # ==========================================
-# 1. THE BULLETPROOF PATH HACK
+# 1.PATH
 # ==========================================
 BASE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 EXTERNAL_DIR = os.path.join(BASE_PATH, 'external', 'Black-Box-Defense')
@@ -121,4 +121,4 @@ if __name__ == "__main__":
         label = "Standard Accuracy (SA)" if r == 0.0 else f"Certified Accuracy (CA) at r={r}"
         print(f"{label}: {certified_acc:.2f}%")
         
-    print("\nDone! To match the paper's exact numbers, run with --num_examples 10000 and --N 100000 on a heavy compute node.")
+    print("\nDone! To match the paper's numbers, run with --num_examples 10000 and --N 100000 on a heavy compute node.")

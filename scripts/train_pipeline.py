@@ -6,7 +6,7 @@ import torch.nn as nn
 from torch.optim import Adam
 
 # ==========================================
-# 1. THE BULLETPROOF PATH HACK
+# 1. PATH
 # ==========================================
 BASE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 EXTERNAL_DIR = os.path.join(BASE_PATH, 'external', 'Black-Box-Defense')
@@ -65,10 +65,10 @@ def train_stage_one(model, train_loader, start_epoch, total_epochs, device):
 def train_stage_two(model, train_loader, classifier, start_epoch, total_epochs, q, device):
     print(f"\n--- Stage 2: ZO Training (q={q}, Target: {total_epochs} Epochs) ---", flush=True)
     
-    # Keeping LR at 1e-4 as discussed for stability
+
     optimizer = Adam(list(model.denoiser.parameters()) + list(model.encoder.parameters()), lr=1e-4)
     
-    # FIX 1: Prevent "Hive Mind" batch averaging
+
     criterion = nn.CrossEntropyLoss(reduction='none') 
     
     model.denoiser.train()
@@ -76,7 +76,7 @@ def train_stage_two(model, train_loader, classifier, start_epoch, total_epochs, 
     model.decoder.eval()
     classifier.eval()
 
-    # FIX 4: Explicitly freeze decoder parameters to prevent memory leaks in the ZO loop
+    
     for param in model.decoder.parameters():
         param.requires_grad = False
 
@@ -122,8 +122,7 @@ def train_stage_two(model, train_loader, classifier, start_epoch, total_epochs, 
                       f"ZO Stab Loss: {losses_total.avg:.4f} "
                       f"Acc: {top1.avg:.2f}%", flush=True)
 
-        # Save checkpoint... (keep your existing save logic here)
-
+        
         save_checkpoint({
             'epoch': epoch + 1,
             'state_dict': model.state_dict(),
@@ -133,7 +132,7 @@ def train_stage_two(model, train_loader, classifier, start_epoch, total_epochs, 
 
         
 # ==========================================
-# 4. MAIN EXECUTION (CLOUD SETTINGS)
+# 4. MAIN EXECUTION 
 # ==========================================
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -143,7 +142,7 @@ if __name__ == "__main__":
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     os.makedirs("outputs", exist_ok=True)
     
-    # Cranked up batch size and workers for the L4 GPU
+    #batch size and workers for the L4 GPU
     train_loader, _ = get_loaders(batch_size=128, workers=8) 
     
     # --- LOAD THE RESNET-110 ---
@@ -178,12 +177,12 @@ if __name__ == "__main__":
                 print(f"=> Resumed Stage {current_stage} from Epoch {start_epoch}", flush=True)
                 break
 
-    # Stage 1: Extended to 100 Epochs for proper AE convergence
+    # Stage 1: 
     if current_stage == 1:
         train_stage_one(defense, train_loader, start_epoch, total_epochs=100, device=device)
         start_epoch, current_stage = 0, 2
     
-    # Stage 2: Extended to 50 Epochs to match paper's ZO fine-tuning
+    # Stage 2:
     if current_stage == 2:
         train_stage_two(defense, train_loader, victim, start_epoch, total_epochs=50, q=192, device=device)
     
