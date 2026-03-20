@@ -1,4 +1,4 @@
-# Robust Black-Box Model Defense 
+# Black-Box Model Defense 
 
 This repository contains a modular training and evaluation pipeline for implementing a robust defense against adversarial attacks in black-box models. The project focuses on a Zeroth-Order (ZO) Autoencoder-based Denoiser (ZO-AE-DS) designed to purify adversarial inputs before they reach a target classifier.
 
