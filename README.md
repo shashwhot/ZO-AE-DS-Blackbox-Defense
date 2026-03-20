@@ -3,7 +3,7 @@
 This repository contains a modular training and evaluation pipeline for implementing a robust defense against adversarial attacks in black-box models. The project focuses on a Zeroth-Order (ZO) Autoencoder-based Denoiser (ZO-AE-DS) designed to purify adversarial inputs before they reach a target classifier.
 
 ## Project Overview
-The implementation follows a two-stage defense strategy that operates without requiring access to the internal gradients of the target model.
+The implementation follows a two-stage training strategy that operates without requiring access to the internal gradients of the target model.
 
 * **Stage 1 (Autoencoder Pre-training):** Trains a denoiser-encoder-decoder chain using reconstruction loss to establish baseline purification capabilities.
 * **Stage 2 (ZO Fine-tuning):** Employs Zeroth-Order optimization to adapt the denoiser to a specific black-box victim model, maximizing classification accuracy under adversarial pressure.
