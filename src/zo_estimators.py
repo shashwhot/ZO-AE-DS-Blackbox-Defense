@@ -15,7 +15,7 @@ def estimate_gradient_rge(z, classifier, decoder, original_pre, criterion, loss_
     z_flat = torch.flatten(z, start_dim=1).detach()
     grad_est = torch.zeros(batch_size, d).cuda()
 
-    # The "Poking" Loop
+    # Poking Loop
     with torch.no_grad():
         for _ in range(q):
             # 1. Generate a random direction vector (u)
