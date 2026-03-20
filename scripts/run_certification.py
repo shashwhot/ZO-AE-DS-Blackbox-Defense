@@ -110,7 +110,7 @@ if __name__ == "__main__":
 
     # 6. Calculate Certified Accuracy at Specific Radii
     print("\n--- Final Certification Results ---")
-    radii_to_check = [0.00, 0.25, 0.50, 0.75] # These are the columns from Table 2 in the paper
+    radii_to_check = [0.00, 0.25, 0.50, 0.75]
     total_evaluated = len(results)
 
     for r in radii_to_check:
