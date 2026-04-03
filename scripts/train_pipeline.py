@@ -103,7 +103,7 @@ def train_stage_two(model, train_loader, classifier, start_epoch, total_epochs, 
             # ZO Stability Loss
             grad_est = estimate_gradient_cge(z, classifier, model.decoder, original_pre, criterion, mu=0.005)
             
-            # FIX 2 & 3: Flatten Z to prevent broadcast explosion, and average the batch
+            # Flatten Z to prevent broadcast explosion, and average the batch
             z_flat = torch.flatten(z, start_dim=1)
             surrogate_loss = torch.sum(z_flat * grad_est, dim=-1).mean()
             
